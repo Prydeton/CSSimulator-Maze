@@ -8,6 +8,7 @@ const DOWN = 2
 const LEFT = 3
 const NOTVISITED = 0
 const VISITED = 1
+
 window.onload = () => {
     const mazeContainer = document.querySelector('#maze_container')
     const width = 31
@@ -16,8 +17,8 @@ window.onload = () => {
     let cellStates = createMazeDataArray(width, height, CELL_WALL)
     let cellVisits = createMazeDataArray(width, height, NOTVISITED)
     let mazeElements =  createMazeElementArray(mazeContainer, width, height, cellStates)
-    console.log(mazeElements)
     const generateButton = document.querySelector("#generate")
+    const bad = document.querySelector("#generate")
     generateButton.onclick = function(){generateMaze(width, height, mazeContainer, mazeElements)}
     updateMazeElements(mazeElements, cellStates)
     //const update = () => {
@@ -54,7 +55,6 @@ const createMazeDataArray = (width, height, value) => {
 }
 
 const updateMazeElements = (mazeElements, cellStates) => {
-    console.log(mazeElements.length)
     let height = mazeElements.length
     let width = mazeElements[0].length
     for (let i = 0; i < height; i++) {
@@ -92,7 +92,7 @@ const onCellPress = (x, y, cellStates) => {
     }
 }
 
-const generateMaze = (width, height, mazeContainer, mazeElements) => {
+const generateMaze = (width, height, mazeElements) => {
     let cellStates = createMazeDataArray(width, height, CELL_WALL)
     cellStates[0][0] = CELL_EMPTY
     generateStructure(cellStates, [0,0], mazeElements);
@@ -104,7 +104,6 @@ const generateStructure = (cellStates, currentCell, mazeElements) => {
     let nextCell
     let middleCell
     directions = shuffleDirections()
-    console.log(directions)
     for (let i = 0; i <= 3; i++) {
         switch (directions[i]) {
             case UP:
@@ -125,7 +124,6 @@ const generateStructure = (cellStates, currentCell, mazeElements) => {
                 break
         }
         if (nextCell[0] < height && nextCell[1] < width && nextCell[0] >= 0 && nextCell[1] >= 0) {
-            console.log(cellStates[nextCell[0]][nextCell[1] == CELL_WALL])
             if (cellStates[nextCell[0]][nextCell[1]] == CELL_WALL) {
                 cellStates[nextCell[0]][nextCell[1]] = CELL_EMPTY
                 cellStates[middleCell[0]][middleCell[1]] = CELL_EMPTY
