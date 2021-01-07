@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: slategrey;
+}
+
 #content {
     display: grid;
     align-items: center;
@@ -15,6 +19,8 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    border: 1px solid black;
+    user-select: none;
 }
 
 .row {
@@ -27,4 +33,26 @@
     width: 16px;
     height: 16px;
     background-color: red;
+}
+
+.cell:hover {
+    cursor: pointer;
+    border: 1px solid black;
+    opacity: 80%;
+}
+
+.cell.wall {
+    background-color: black;
+}
+
+.cell.empty {
+    background-color: white;
+}
+
+.cell.end {
+    background-color: red;
+}
+
+.cell.start {
+    background-color: green;
 }
