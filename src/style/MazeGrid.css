@@ -28,3 +28,19 @@
     opacity: 80%;
     box-shadow: inset 0px 0px 1px 1px #ffffffa1
 }
+
+.grid-cell.wall {
+    background-color: black;
+}
+
+.grid-cell.empty {
+    background-color: slategray;
+}
+
+.grid-cell.end {
+    background-color: red;
+}
+
+.grid-cell.start {
+    background-color: green;
+}

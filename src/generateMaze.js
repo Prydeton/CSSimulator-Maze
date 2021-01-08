@@ -5,7 +5,6 @@ const generateMaze = (width, height) => {
     let cellStates = makeGridData(width, height, () => cell.WALL)
     cellStates[0][0] = cell.EMPTY
     generateStructure(cellStates, [0,0]);
-    console.log(cellStates)
     return cellStates 
 }
 
