@@ -5,7 +5,9 @@
   "main": "maze.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel static/index.html"
+    "start": "parcel static/index.html",
+    "build": "parcel build static/index.html --public-url prydeton.github.io/CSSimulator-Maze/",
+    "build-local": "parcel build static/index.html"
   },
   "repository": {
     "type": "git",
