@@ -1,0 +1,29 @@
+{
+  "name": "cssimulator-maze",
+  "version": "1.0.0",
+  "description": "Generate and solve mazes",
+  "main": "maze.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel static/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prydeton/CSSimulator-Maze.git"
+  },
+  "keywords": [
+    "mazes"
+  ],
+  "author": "Maxwell Reid, Ewan Breakey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Prydeton/CSSimulator-Maze/issues"
+  },
+  "homepage": "https://github.com/Prydeton/CSSimulator-Maze#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "style": "0.0.3"
+  }
+}
