@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import './style/MazeToolBar.css'
+
 const toolOptions = ['empty', 'wall', 'start', 'end']
 
 const MazeToolBar = ({ tool, onToolChange }) => {
