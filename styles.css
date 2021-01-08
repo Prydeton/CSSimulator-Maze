@@ -56,3 +56,7 @@ body {
 .cell.start {
     background-color: green;
 }
+
+.cell.visited {
+    background-color: blue;
+}

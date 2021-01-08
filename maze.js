@@ -15,12 +15,15 @@ window.onload = () => {
     const height = 31
 
     let cellStates = createMazeDataArray(width, height, CELL_WALL)
-    let cellVisits = createMazeDataArray(width, height, NOTVISITED)
     let mazeElements =  createMazeElementArray(mazeContainer, width, height, cellStates)
-    const generateButton = document.querySelector("#generate")
-    const bad = document.querySelector("#generate")
-    generateButton.onclick = function(){generateMaze(width, height, mazeContainer, mazeElements)}
+    
     updateMazeElements(mazeElements, cellStates)
+
+    const generateButton = document.querySelector("#generate")
+    generateButton.onclick = function(){generateMaze(width, height, mazeElements)}
+    
+    const bad = document.querySelector("#bad")
+    bad.onclick = function(){basicSolver(cellStates, mazeElements)}
     //const update = () => {
     //    requestAnimationFrame(update)
     //}
@@ -54,23 +57,28 @@ const createMazeDataArray = (width, height, value) => {
     return Array.from({length: height}).map(_ => Array.from({length: width}).map(_ => value))
 }
 
-const updateMazeElements = (mazeElements, cellStates) => {
-    let height = mazeElements.length
-    let width = mazeElements[0].length
+const updateMazeElements = (mazeElements, cellStates, cellVisits = createMazeDataArray(cellStates.length, cellStates[0].length, NOTVISITED)) => {
+    let height = cellStates.length
+    let width = cellStates[0].length
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const element =  mazeElements[i][j]
             const state = cellStates[i][j]
-            const classes = getClassesFromState(state)
+            const visit = cellVisits[i][j]
+            const classes = getClassesFromState(state, visit)
             element.className = "cell " + classes.join(" ")
         }
     }
 }
 
-const getClassesFromState = (state) => {
+const getClassesFromState = (state, visit) => {
     switch (state) {
         case CELL_EMPTY:
-            return ["empty"]
+            if (visit == VISITED) {
+                return ["visited"]
+            } else {
+                return ["empty"]
+            }
         case CELL_WALL:
             return ["wall"]
         case CELL_START:
@@ -92,6 +100,10 @@ const onCellPress = (x, y, cellStates) => {
     }
 }
 
+const isValidCell = (nextCell, height, width) => {
+    return nextCell[0] < height && nextCell[1] < width && nextCell[0] >= 0 && nextCell[1] >= 0
+}
+
 const generateMaze = (width, height, mazeElements) => {
     let cellStates = createMazeDataArray(width, height, CELL_WALL)
     cellStates[0][0] = CELL_EMPTY
@@ -99,10 +111,10 @@ const generateMaze = (width, height, mazeElements) => {
 }
 
 const generateStructure = (cellStates, currentCell, mazeElements) => {
-    let height = cellStates.length
-    let width = cellStates[0].length
     let nextCell
     let middleCell
+    let height = cellStates.length
+    let width = cellStates[0].length
     directions = shuffleDirections()
     for (let i = 0; i <= 3; i++) {
         switch (directions[i]) {
@@ -143,3 +155,47 @@ const shuffleDirections = () => {
     }
     return directions
 }
+
+const basicSolver = (cellStates, mazeElements) => {
+    let cellVisits = createMazeDataArray(cellStates.length, cellStates[0].length, NOTVISITED)
+    let start
+    let end
+    for (let i = 0; i <= cellStates.length; i++) {
+        for (let j = 0; j <= cellStates.length; j++) {
+            if (cellStates[i][j] == CELL_START){
+                start = [i,j]
+            }
+            if (cellStates[i][j] == CELL_END){
+                start = [i,j]
+            }
+       }
+    }
+    if (start && end) {
+        let currentCell = start
+        cellVisits[start[0]][start[1]] = VISITED
+        let directions = [UP, DOWN, LEFT, RIGHT]
+        while (!solved) {
+            for (let i = 0; i < 4; i++) {
+                switch (directions[i]) {
+                    case UP:
+                        nextCell = [currentCell[0] - 1, currentCell[1]] 
+                    case RIGHT:
+                        nextCell = [currentCell[0], currentCell[1] + 1] 
+                    case DOWN:
+                        nextCell = [currentCell[0] + 1, currentCell[1]] 
+                    case LEFT:
+                        nextCell = [currentCell[0], currentCell[1] - 1] 
+                }
+                if (isValidCell(nextCell, nextCell, height, width)) {
+                    if (cellStates[nextCell[0]] != CELL_WALL && cellStates[nextCell[1]] != CELL_WALL) {
+                        currentCell = nextCell
+                        cellVisits[currentCell[0]][currentCell[1]] = VISITED
+                        updateMazeElements(mazeElements, cellStates)
+                        break
+                    }
+                }
+            }
+        }
+    }
+}
+
