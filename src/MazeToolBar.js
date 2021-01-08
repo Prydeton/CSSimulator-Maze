@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const MazeToolBar = ({ tool, onToolChange, toolOptions }) => {
+const MazeToolBar = ({ tool, onToolChange, toolOptions, onGenerate }) => {
     const [selectedTool, setSelectedTool] = useState(tool || toolOptions[0])
     const handleToolBarChange = e => {
         setSelectedTool(e.target.value)
@@ -14,6 +14,7 @@ const MazeToolBar = ({ tool, onToolChange, toolOptions }) => {
                     handleChange={handleToolBarChange}
                     key={option}
                     option={option} />) }
+            <button onClick={onGenerate}>Generate</button>
         </div>
     )
 }
