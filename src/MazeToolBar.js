@@ -4,7 +4,7 @@ import './style/MazeToolBar.css'
 
 const toolOptions = ['empty', 'wall', 'start', 'end']
 
-const MazeToolBar = ({ tool, onToolChange }) => {
+const MazeToolBar = ({ tool, onToolChange, toolOptions }) => {
     const [selectedTool, setSelectedTool] = useState(tool || toolOptions[0])
     const handleToolBarChange = e => {
         setSelectedTool(e.target.value)
