@@ -18,13 +18,7 @@ window.onload = () => {
     let cellVisits = createMazeDataArray(width, height, NOTVISITED)
     let mazeElements =  createMazeElementArray(mazeContainer, width, height, cellStates)
     const generateButton = document.querySelector("#generate")
-    const bad = document.querySelector("#generate")
-    generateButton.onclick = function(){generateMaze(width, height, mazeContainer, mazeElements)}
-    updateMazeElements(mazeElements, cellStates)
-    //const update = () => {
-    //    requestAnimationFrame(update)
-    //}
-    //update()
+    generateButton.onclick = function(){generateMaze(width, height, mazeElements)}
 }
 
 const createMazeElementArray = (container, width, height, cellStates) => {
