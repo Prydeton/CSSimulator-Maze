@@ -6,13 +6,16 @@ import generateMaze from './generateMaze'
 import exportMaze from './exportMaze'
 import {makeGridData, cell} from './grid'
 import cloneDeep from 'lodash.clonedeep'
+import { useQueryParam } from './queryParams.js'
 
 import './style/App.css'
 
 const toolOptions = ['empty', 'wall', 'start', 'end']
 
 const App = () => {
-    const [width, height] = [17, 17]
+    const [width, _setWidth] = useQueryParam('size', 17)
+    const [height, _setHeight] = useQueryParam('size', 17)
+    //const [width, height] = [17, 17]
     const [gridData, setGridData] = useState(makeGridData(width, height, () => cell.WALL))
     const [tool, setTool] = useState(toolOptions[1])
 
