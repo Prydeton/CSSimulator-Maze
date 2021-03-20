@@ -5,11 +5,11 @@ const cellToChar = (c) => {
     case cell.EMPTY:
       return '.'
     case cell.WALL:
-      return '#'
+      return '='
     case cell.END:
       return 'G'
     case cell.START:
-      return 's'
+      return 'S'
   }
 }
 
