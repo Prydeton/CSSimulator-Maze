@@ -27,7 +27,6 @@ const MazeGridCell = ({ cellData, onCellPress, i, j}) => {
     const classes = getClassesFromState(cellData)
     
     const handleCellSelection = (i, j, e) => {
-        console.log("test")
         if (e.buttons > 0 && e.buttons < 4) {
             onCellPress(i, j)
             e.preventDefault()
