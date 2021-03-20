@@ -24,6 +24,18 @@ const App = () => {
       exportMaze(gridData)
     }
 
+    const handleOutline = () => {
+      let gd = cloneDeep(gridData)
+      for (let i = 0; i < width; i++) {
+        for (let j = 0; j < height; j++) {
+          if (i === 0 || j === 0 || i === width - 1 || j === height - 1) {
+            gd[i][j] = cell.WALL
+          }
+        }
+      }
+      setGridData(gd)
+    }
+
     const handleCellPress = (i, j) => {
         let gd = cloneDeep(gridData)
         switch (tool) {
@@ -47,7 +59,7 @@ const App = () => {
 
     return (
         <div className='maze-app'>
-            <MazeToolBar onToolChange={setTool} toolOptions={toolOptions} tool={tool} onGenerate={handleGeneration} onExport={handleExport}/>
+            <MazeToolBar onToolChange={setTool} toolOptions={toolOptions} tool={tool} onGenerate={handleGeneration} onExport={handleExport} onOutline={handleOutline}/>
             <MazeGrid gridData={gridData} onCellPress={handleCellPress}/>
         </div>
     )

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './style/MazeToolBar.css'
 
-const MazeToolBar = ({ tool, onToolChange, toolOptions, onGenerate, onExport }) => {
+const MazeToolBar = ({ tool, onToolChange, toolOptions, onGenerate, onExport, onOutline }) => {
     const [selectedTool, setSelectedTool] = useState(tool || toolOptions[0])
     const handleToolBarChange = e => {
         setSelectedTool(e.target.value)
@@ -18,6 +18,7 @@ const MazeToolBar = ({ tool, onToolChange, toolOptions, onGenerate, onExport }) 
                     option={option} />) }
             <button onClick={onGenerate}>Generate</button>
             <button onClick={onExport}>Export</button>
+            <button onClick={onOutline}>Outline</button>
         </div>
     )
 }
