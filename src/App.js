@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import MazeToolBar from './MazeToolBar'
 import MazeGrid from './MazeGrid'
 import generateMaze from './generateMaze'
+import exportMaze from './exportMaze'
 import {makeGridData, cell} from './grid'
 import cloneDeep from 'lodash.clonedeep'
 
@@ -17,6 +18,10 @@ const App = () => {
 
     const handleGeneration = () => {
         setGridData(generateMaze(width, height))
+    }
+
+    const handleExport = () => {
+      exportMaze(gridData)
     }
 
     const handleCellPress = (i, j) => {
@@ -42,7 +47,7 @@ const App = () => {
 
     return (
         <div className='maze-app'>
-            <MazeToolBar onToolChange={setTool} toolOptions={toolOptions} tool={tool} onGenerate={handleGeneration}/>
+            <MazeToolBar onToolChange={setTool} toolOptions={toolOptions} tool={tool} onGenerate={handleGeneration} onExport={handleExport}/>
             <MazeGrid gridData={gridData} onCellPress={handleCellPress}/>
         </div>
     )
