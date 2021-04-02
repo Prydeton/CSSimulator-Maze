@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel static/index.html",
-    "build": "parcel build static/index.html --public-url https://prydeton.github.io/CSSimulator-Maze/",
+    "build": "parcel build static/index.html --public-url https://maxwellreid.tech/CSSimulator-Maze/",
     "build-local": "parcel build static/index.html"
   },
   "repository": {
